@@ -1,6 +1,6 @@
 *.*~
-static/
-media/
+#Static/
+Media/
 .gitignore
 db.sqlite3
 *.pyc
