@@ -4,7 +4,7 @@ from django.db import models
 
 from Auth.models import ILPUser
 
-class Attendance(models.Model):
+class AttendanceLog(models.Model):
 	
 	participant_id = models.ForeignKey(ILPUser)
 

@@ -1,6 +1,6 @@
 from django.db import models
 
-class LearingCenter(models.Model):
+class LearningCenter(models.Model):
 	
 	center_id = models.CharField(
 		verbose_name = "Learing Center Id",
@@ -14,7 +14,10 @@ class LearingCenter(models.Model):
 	)
 
 
-class LearingCampus(models.Model) :
+	def __unicode__(self):
+        return unicode(self.center_id)
+
+class LearningCampus(models.Model) :
 
 	campus_id = CharField(
 		verbose_name = "Learing Campus Id",
@@ -27,10 +30,13 @@ class LearingCampus(models.Model) :
 		max_length = 50,
 	)
 
-	center = models.ForeignKey('LearingCenter')
+	center = models.ForeignKey('LearningCenter')
+
+	def __unicode__(self):
+        return unicode(self.campus_id)
 	
 
-class LearingRoom(models.Model) :
+class LearningRoom(models.Model) :
 
 	room_id = models.CharField(
 		verbose_name = "Learing Room Id",
@@ -43,9 +49,12 @@ class LearingRoom(models.Model) :
 		max_length = 50,
 	)
 
-	room_location = models.ForeignKey('LearingCampus')
+	room_location = models.ForeignKey('LearningCampus')
 
-	campus = models.ForeignKey('LearingCampus')
+	campus = models.ForeignKey('LearningCampus')
+
+	def __unicode__(self):
+        return unicode(self.room_id)
 
 class Batch(models.Model):
 
@@ -68,7 +77,10 @@ class Batch(models.Model):
 		verbose_name = "End Date",
 	)
 	
-	center = models.ForeignKey('LearingCenter')
+	center = models.ForeignKey('LearningCenter')
+
+	def __unicode__(self):
+        return unicode(self.batch_id)
 
 class LG(models.Model):
 
@@ -85,7 +97,11 @@ class LG(models.Model):
 
 	batch_id = models.ForeignKey('Batch')
 
-	room_id = models.ForeignKey('LearingRoom')
+	room_id = models.ForeignKey('LearningRoom')
+
+	def __unicode__(self):
+        return unicode(self.lg_id)
+
 
 class LG_Lead(models.Model):
 	

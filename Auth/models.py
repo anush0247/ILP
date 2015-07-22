@@ -127,7 +127,7 @@ class ILPUser(AbstractBaseUser):
         return self.FirstName
 
     def __str__(self):              # __unicode__ on Python 2
-        return self.rid
+        return self.EmpNo
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
