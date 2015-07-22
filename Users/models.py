@@ -9,6 +9,9 @@ class Participant(models.Model):
 	participant_id = models.OneToOneField(ILPUser)
 	
 	lg_id = models.ForeignKey('ILP.LG')
+
+	def __unicode__(self):
+        return unicode(self.participant_id)
 	
 	
 class Stream(model.Model):
@@ -23,12 +26,18 @@ class Stream(model.Model):
 		verbose_name = "Stream Name",
 		max_length = 50,
 	)
+	
+	def __unicode__(self):
+        return unicode(self.stream_id)
 
 class Lead(model.Model):
 	
 	lead_id = models.OneToOneField(ILPUser)
 
     stream = models.ForeignKey('Stream')
+
+	def __unicode__(self):
+        return unicode(self.lead_id)
 
 class Department(model.Model):
 	
@@ -43,16 +52,30 @@ class Department(model.Model):
 		max_length = 50,
 	)
 
+	def __unicode__(self):
+        return unicode(self.department_id)
+
 class Support(model.Model):
 
 	support_id = models.OneToOneField(ILPUser)
 
 	department_id =  models.ForeignKey('Stream')
 
+	designation = models.CharField(
+		verbose_name = "Designation",
+		max_length = 50,
+	)
+
+	def __unicode__(self):
+        return unicode(self.support_id)
+
 class Guest(model.Model):
 	
 	guest_id = models.OneToOneField(ILPUser)
 
 	sessions = models.ManyToManyField('Schedule.Session') 
+
+	def __unicode__(self):
+        return unicode(self.guest_id)
 
 

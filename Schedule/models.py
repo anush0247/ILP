@@ -32,7 +32,8 @@ class TimeSlot(models.Model):
 	
 	campus =  models.ForeignKey('ILP.LearingCampus')
 	
-
+	def __unicode__(self):
+        return unicode(self.slot_id)
 
 
 class Session(models.Model):
@@ -57,6 +58,9 @@ class Session(models.Model):
 	date = models.DateField(
         verbose_name = "Date",
     )	
+
+	def __unicode__(self):
+        return unicode(self.session_id)
 
 class ExtraSlot(models.Model):
 	
