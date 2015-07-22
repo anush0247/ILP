@@ -39,6 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'Auth',
+	'Attendance',
+	'ILP',
+	'Schedule',
+	'Users',
 )
 
 MIDDLEWARE_CLASSES = (
