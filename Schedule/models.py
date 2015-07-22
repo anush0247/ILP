@@ -26,14 +26,14 @@ class TimeSlot(models.Model):
 	)
 	
 	is_break = models.BooleanField(
-        default=False,
-        verbose_name = "Is a Break ?",
+		default=False,
+		verbose_name = "Is a Break ?",
     )
 	
-	campus =  models.ForeignKey('ILP.LearingCampus')
+	#campus =  models.ForeignKey('ILP.LearingCampus')
 	
 	def __unicode__(self):
-        return unicode(self.slot_id)
+		return unicode(self.slot_id)
 
 
 class Session(models.Model):
@@ -56,11 +56,11 @@ class Session(models.Model):
 	time_slot = models.ForeignKey('TimeSlot')
 
 	date = models.DateField(
-        verbose_name = "Date",
+		verbose_name = "Date",
     )	
 
 	def __unicode__(self):
-        return unicode(self.session_id)
+		return unicode(self.session_id)
 
 class ExtraSlot(models.Model):
 	
@@ -69,7 +69,7 @@ class ExtraSlot(models.Model):
 	time_slot = models.ForeignKey('TimeSlot')
 
 	date = date = models.DateField(
-        verbose_name = "Date",
+		verbose_name = "Date",
     )
 	
 	

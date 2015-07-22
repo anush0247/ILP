@@ -15,11 +15,11 @@ class LearningCenter(models.Model):
 
 
 	def __unicode__(self):
-        return unicode(self.center_id)
+		return unicode(self.center_id)
 
 class LearningCampus(models.Model) :
 
-	campus_id = CharField(
+	campus_id = models.CharField(
 		verbose_name = "Learing Campus Id",
 		unique = True,
 		max_length = 50,
@@ -33,7 +33,7 @@ class LearningCampus(models.Model) :
 	center = models.ForeignKey('LearningCenter')
 
 	def __unicode__(self):
-        return unicode(self.campus_id)
+		return unicode(self.campus_id)
 	
 
 class LearningRoom(models.Model) :
@@ -51,10 +51,8 @@ class LearningRoom(models.Model) :
 
 	room_location = models.ForeignKey('LearningCampus')
 
-	campus = models.ForeignKey('LearningCampus')
-
 	def __unicode__(self):
-        return unicode(self.room_id)
+		return unicode(self.room_id)
 
 class Batch(models.Model):
 
@@ -73,14 +71,14 @@ class Batch(models.Model):
 		verbose_name = "Start Date",
 	)
 
-	end_date = model.DateField(
+	end_date = models.DateField(
 		verbose_name = "End Date",
 	)
 	
 	center = models.ForeignKey('LearningCenter')
 
 	def __unicode__(self):
-        return unicode(self.batch_id)
+		return unicode(self.batch_id)
 
 class LG(models.Model):
 
@@ -100,20 +98,20 @@ class LG(models.Model):
 	room_id = models.ForeignKey('LearningRoom')
 
 	def __unicode__(self):
-        return unicode(self.lg_id)
+		return unicode(self.lg_id)
 
 
 class LG_Lead(models.Model):
 	
-	lg_id = model.ForeignKey('LG')
+	lg_id = models.ForeignKey('LG')
 
-	lead_id = model.ForeignKey(ILPUser)
+	lead_id = models.ForeignKey('Auth.ILPUser')
 
 	start_date = models.DateField(
 		verbose_name = "Start Date",
 	)
 
-	end_date = model.DateField(
+	end_date = models.DateField(
 		verbose_name = "End Date",
 	)
 	

@@ -13,9 +13,9 @@ class LearningCampusAdmin(admin.ModelAdmin):
 admin.site.register(LearningCampus, LearningCampusAdmin)
 
 class LearningRoomAdmin(admin.ModelAdmin):
-	list_display = ('room_id', 'room_name', 'room_location', 'campus')
+	list_display = ('room_id', 'room_name', 'room_location',)
 
-admin.site.register(LearingRoom, LearningRoomAdmin)
+admin.site.register(LearningRoom, LearningRoomAdmin)
 
 class BatchAdmin(admin.ModelAdmin):
 	list_display = ('batch_id', 'batch_name', 'start_date', 'end_date', 'center')

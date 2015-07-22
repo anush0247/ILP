@@ -11,10 +11,10 @@ class Participant(models.Model):
 	lg_id = models.ForeignKey('ILP.LG')
 
 	def __unicode__(self):
-        return unicode(self.participant_id)
+		return unicode(self.participant_id)
 	
 	
-class Stream(model.Model):
+class Stream(models.Model):
 	
 	stream_id =  models.CharField(
 		verbose_name = "Stream Id",
@@ -28,18 +28,18 @@ class Stream(model.Model):
 	)
 	
 	def __unicode__(self):
-        return unicode(self.stream_id)
+		return unicode(self.stream_id)
 
-class Lead(model.Model):
+class Lead(models.Model):
 	
 	lead_id = models.OneToOneField(ILPUser)
-
-    stream = models.ForeignKey('Stream')
+	
+	stream = models.ForeignKey('Stream')
 
 	def __unicode__(self):
-        return unicode(self.lead_id)
+		return unicode(self.lead_id)
 
-class Department(model.Model):
+class Department(models.Model):
 	
 	department_id =  models.CharField(
 		verbose_name = "Department Id",
@@ -53,9 +53,9 @@ class Department(model.Model):
 	)
 
 	def __unicode__(self):
-        return unicode(self.department_id)
+		return unicode(self.department_id)
 
-class Support(model.Model):
+class Support(models.Model):
 
 	support_id = models.OneToOneField(ILPUser)
 
@@ -67,15 +67,15 @@ class Support(model.Model):
 	)
 
 	def __unicode__(self):
-        return unicode(self.support_id)
+		return unicode(self.support_id)
 
-class Guest(model.Model):
+class Guest(models.Model):
 	
 	guest_id = models.OneToOneField(ILPUser)
 
 	sessions = models.ManyToManyField('Schedule.Session') 
 
 	def __unicode__(self):
-        return unicode(self.guest_id)
+		return unicode(self.guest_id)
 
 
