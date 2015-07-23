@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>ILP Online Portal v1.0 - Welcome</title>
+    <link rel="stylesheet" type="text/css" href="/static/assets/font_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/semantic.min.css">
+    
+    <script src="/static/assets/jquery.min.js"></script>
+    <script src="/static/assets/semantic.min.js"></script>
+  </head>
+  <body>
+    <div class="ui   menu">
+      <div class="ui container">
+	<a class="item active" href="./">
+	  <div class="header">
+	    <i class="home icon"></i> ILP Online Portal <small>v1.0</small>
+	  </div>
+	</a>
+	<div class="right item " id="signup">
+	  <a class="ui button green" href="signup.jsp"> <i
+							   class="user icon"></i> Sign Up
+	  </a>
+	</div>
+	
+      </div>
+    </div>
+    <br>
+    <div class="ui container">
+      
+      <div class="ui  grid">
+	<div class="row">
+	  <div class="twelve wide column">
+	    <div class="ui large header">Welcome to ILP Online Portal <small>v1.0</small> </div>
+	  </div>
+	  
+	  
+	  <div class="four wide column">
+	    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+	      <div class="ui small form piled segment left aligned relaxed "
+		   id="loginForm" style="background-color: inherint;">
+		
+		<h3 class="ui icon header">Login</h3>
+		 {% if form.errors %}
+	      <center><span class="ui red fluid message" style="padding-top:10px; padding-bottom:-10px;">Invalid Username / Password </span></center>
+	      {% endif %}
+	      {% csrf_token %}
+		<div class="field">
+		  <label>User Name</label> <input placeholder="User Name"
+						  type="text" name="username">
+		</div>
+		<div class="field">
+		  <label>Password</label> <input placeholder="Password"
+						 type="password" name="password">
+		  <input type="hidden" name="next" value="{{ next }}" />
+		</div>
+		<button class="ui submit button small blue" type="submit">
+		  Continue &nbsp; <i class="icon long arrow right"></i>
+		</button>
+		<a href="#" style="float: right; padding-top: 4%;">Forgot
+		  Password ?</a>
+		
+	      </div>
+	    </form>
+	  </div>
+	</div>
+      </div>
+      <script type="text/javascript">
+    	
+	var loginFields = {
+	    username : {
+		identifier : 'username',
+		rules : [ {
+		    type : 'empty',
+		    prompt : 'Please enter a username'
+		} ]
+	    },
+	    password : {
+		identifier : 'password',
+		rules : [ {
+		    type : 'empty',
+		    prompt : 'Please enter a password'
+		}, {
+		    type : 'length[8]',
+		    prompt : 'Your password must be at least 6 characters'
+		} ]
+	    },
+	}
+	$(document).ready(function() {
+	    $("#footer").load("footer.html");
+	    $("#loginForm ").form({
+		fields : loginFields,
+		inline : false,
+		on : 'blur'
+	    });
+	});
+      </script>
+      <br> <br> <br>
+      <center>
+	
+	<div class="ui massive horizontal list center aligned ">
+	  <div class="item">
+	    <i class="map marker icon"></i>
+	    <div class="content">
+	      <a class="header">Learn & Share</a>
+	    </div>
+	  </div>
+	  <div class="item">
+	    <i class="map marker icon"></i>
+	    <div class="content">
+	      <a class="header">Connect</a>
+	    </div>
+	  </div>
+	  <div class="item">
+	    <i class="map marker icon"></i>
+	    <div class="content">
+	      <a class="header">Collaborate</a>
+	    </div>
+	  </div>
+	  <div class="item">
+	    <i class="map marker icon"></i>
+	    <div class="content">
+	      <a class="header">Compete</a>
+	    </div>
+	  </div>
+	  <div class="item">
+	    <i class="map marker icon"></i>
+	    <div class="content">
+	      <a class="header">Raise</a>
+	    </div>
+	  </div>
+	  
+	</div>
+	
+      </center>
+      
+      <br>
+      <br>
+      
+      <div id="footer"></div>
+            
+    </div>
+  </body>
+</html>

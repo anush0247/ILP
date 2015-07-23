@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>ILP Online Portal - Login</title>
+    <link rel="stylesheet" type="text/css" href="/static/assets/font_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/semantic.min.css">
+    
+    <script src="/static/assets/jquery.min.js"></script>
+    <script src="/static/assets/semantic.min.js"></script>
+  </head>
+  <body style="padding-top: 5%;">
+    <h2 class="ui header center aligned">
+      ILP Online Portal <small>v1.0</small>
+    </h2>
+    <br>
+    <br>
+    <div
+       class="ui three column equal height center aligned  relaxed stackable page grid">
+      <div class="row">
+	<div class="column">
+	  
+	</div>
+	
+	<div class="column">
+	  <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+	  <div class="ui small form piled segment left aligned relaxed"
+	       style="background-color: inherint;">
+	    <h3 class="ui icon header">Login</h3>
+	    {% if form.errors %}
+	      <center><span class="ui red fluid message" style="padding-top:10px; padding-bottom:-10px;">Invalid Username / Password </span></center>
+	      {% endif %}
+	      {% csrf_token %}
+	    <div class="field">
+	      <label>User Name</label> <input placeholder="User Name"
+					      type="text" name="username">
+	    </div>
+	    <div class="field">
+	      <label>Password</label> <input placeholder="Password"
+					     type="password" name="password">
+			<input type="hidden" name="next" value="{{ next }}" />
+	    </div>
+	    <button class="ui submit button small blue" type="submit">Continue</button>
+	    <a href="#" style="float: right; padding-top: 4%;">Forgot
+	      Password</a>
+	  </div>
+	  </form>
+	</div>
+	<div class="column">
+	  
+	</div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <h5 class="ui header center aligned" style="bottom:10%;">&copy; Copyright 2015, ILP Inovations - TCS ILP Ahmedabad </h5>
+  </body>
+</html>

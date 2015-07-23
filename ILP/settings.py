@@ -87,7 +87,7 @@ ROOT_URLCONF = 'ILP.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(BASE_DIR, 'Templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,6 +95,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+				"django.core.context_processors.i18n",
+   	 			"django.core.context_processors.media",
+    			"django.core.context_processors.static",
+    			"django.core.context_processors.tz",
             ],
         },
     },
@@ -131,4 +135,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    
+)
+
+from django.core.urlresolvers import reverse_lazy
+
+LOGIN_URL=reverse_lazy("login")
+LOGIN_REDIRECT_URL=reverse_lazy("home")
+LOGOUT_URL=reverse_lazy("logout")
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+
