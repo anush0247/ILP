@@ -11,4 +11,4 @@ from Users.models import Participant
 def HomePageView(request):
 	
 	context = {"participant_profile" : Participant.objects.get(participant_id = request.user), }
-	return render(request, "afterLogin.html", context)
+	return render(request, "home.html", context)

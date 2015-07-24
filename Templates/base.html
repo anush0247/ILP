@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>ILP Online Portal v1.0 - {% block title %} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/assets/font_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/semantic.min.css">
+    <script src="/static/assets/jquery.min.js"></script>
+    <script src="/static/assets/semantic.min.js"></script>
+    <script>
+      $(document).ready(function(){
+	  $('.message .close').on('click', function() {
+	      $(this).closest('.message').fadeOut();
+	  });
+      });  
+    </script>
+  </head>
+  <body>
+    <!-- menu -->
+    <div class="ui fixed menu">
+      <div class="ui container">
+	<a class="item {% block home_active %}{% endblock %}" href="/">
+	  <div class="header">
+	    <i class="home icon"></i> ILP Online Portal <small>v1.0</small>
+	  </div>
+	</a> 
+	<div class="ui simple dropdown item"> 
+	  <i class="grid layout icon"></i> All Apps <i class="dropdown icon"></i>
+	  <div class="menu">
+	    <a class="item "> <i class="alarm outline icon"></i> Attendance </a> 
+	    <a class="item"> <i class="calendar outline icon"></i> Scheduling Tool </a> 
+	    <a class="item"> <i class="code icon"></i>Leave Tracker </a>
+	  </div>
+	</div>
+	<a class="item"> <i class="announcement icon"></i> Updates  </a> 
+	<div class="ui simple dropdown  right item">
+	  <i class="icon user"></i>
+	  {{ user.EmpNo }}
+	  <i class="dropdown icon"></i>
+	  <div class="menu">
+	    <a class="item" href="/auth/change_password/"><i class="settings icon"></i> Change Password</a>
+	    <a class="item" href="/auth/logout"><i class="sign out icon"></i> Log out</a>
+	  </div>
+	</div>
+      </div>
+    </div>
+    <!-- end of menu -->
+    <br><br><br>
+    <!-- main body -->
+    <div class="ui container">
+      {% block main %}
+      {% endblock %}
+    </div>
+    <!-- end of main body -->
+    <!-- footer -->
+    <br><br>
+    <div class="ui  padded   segment">
+      <div class="ui  container  divided equal height  grid">
+	<div class="three wide column">
+	  <h4 class="ui  header">About</h4>
+	  <div class="ui  link list">
+	    <a href="#" class="item">Sitemap</a> <a href="#" class="item">Contact
+	      Us</a> <a href="#" class="item">About Us </a>
+	  </div>
+	</div>
+	<div class="three wide column">
+	  <h4 class="ui  header">Info</h4>
+	  <div class="ui  link list">
+	    <a href="#" class="item">TCS Ltd</a> <a href="#" class="item">
+	      Ultimatix</a>
+	  </div>
+	</div>
+	<div class="seven wide column">
+	  <h4 class="ui  header">Credits</h4>
+	  <p>&copy; 2015 - Developed and Maintains by TCS ILP - Innovations
+	    Club</p>
+	  <a href="#"><i class="facebook square icon large"></i></a>
+	  <a href="#"><i class="twitter icon large"></i></a>
+	  <a href="#"><i class="google plus square icon large"></i></a>
+	</div>
+      </div>
+    </div>
+    <!-- end of footer -->
+  </body>
+</html>
