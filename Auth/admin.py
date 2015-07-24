@@ -14,7 +14,7 @@ class UserCreationForm(forms.ModelForm):
 
 	class Meta:
 		model = ILPUser
-		fields = ('EmpNo','FirstName', 'LastName', 'Email', 'DoB', 'Gender', 'Profile')
+		fields = ('EmpNo','FirstName', 'LastName', 'Email', 'Mobile', 'DoB', 'Gender', 'Profile')
 
 	def clean_password2(self):
 		# Check that the two password entries match
@@ -41,7 +41,7 @@ class UserChangeForm(forms.ModelForm):
 
 	class Meta:
 		model = ILPUser
-		fields = ('EmpNo','FirstName', 'LastName', 'Email', 'DoB', 'Gender', 'Profile','is_active', 'is_admin')
+		fields = ('EmpNo','FirstName', 'LastName', 'Email', 'Mobile', 'DoB', 'Gender', 'Profile','is_active', 'is_admin')
 		
 	def clean_password(self):
 		# Regardless of what the user provides, return the initial value.
@@ -52,19 +52,19 @@ class UserChangeForm(forms.ModelForm):
 class ILPUserAdmin(UserAdmin):
 	form = UserChangeForm
 	add_form = UserCreationForm
-	list_display = ('EmpNo', 'FirstName', 'LastName', 'Email', 'DoB', 'Gender', 'Profile','is_admin')
+	list_display = ('EmpNo', 'FirstName', 'LastName', 'Email','Mobile', 'DoB', 'Gender', 'Profile','is_admin')
 	list_filter = ('Profile',)
 	ordering = ('EmpNo',)
 	filter_horizontal = ()
 	fieldsets = (
 		("Credentital", {"fields" : ("EmpNo","password")}),
-		("Basic Info", {"fields" : ( 'FirstName', 'LastName', 'Email', 'DoB', 'Gender', 'Profile',)}),
+		("Basic Info", {"fields" : ( 'FirstName', 'LastName', 'Email', 'Mobile', 'DoB', 'Gender', 'Profile',)}),
 		('Permissions', {'fields': ('is_admin','is_active')}),
 	)
 
 	add_fieldsets = (
 		("Credentital", {"fields" : ("EmpNo","password1", "password2")}),
-		("Basic Info", {"fields" : ( 'FirstName', 'LastName', 'Email', 'DoB', 'Gender', 'Profile',)}),
+		("Basic Info", {"fields" : ( 'FirstName', 'LastName', 'Email', 'Mobile', 'DoB', 'Gender', 'Profile',)}),
 		('Permissions', {'fields': ('is_admin','is_active')}),
 	)
 	#exclude = ('username', 'first_name', 'last_name', 'is_superuser', 'is_staff', 'groups', 'user_permissions', 'email', 'date_joined')

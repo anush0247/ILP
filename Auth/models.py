@@ -4,9 +4,10 @@ from django.contrib.auth.models import (
 )
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 class UserManager(BaseUserManager):
-    def create_user(self, EmpNo, password, FirstName, LastName, Email, DoB, Gender, Profile):
+    def create_user(self, EmpNo, password, FirstName, LastName, Email, Mobile, DoB, Gender, Profile):
 
         if not FirstName :
             raise ValueError('Users must have a first name')
@@ -19,6 +20,7 @@ class UserManager(BaseUserManager):
             LastName = LastName,
             DoB = DoB,
             Email = Email,
+            Mobile = Mobile,
             Gender = Gender,
             Profile = Profile
         )
@@ -27,7 +29,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, EmpNo, password, FirstName, LastName, Email, DoB, Gender, Profile):
+    def create_superuser(self, EmpNo, password, FirstName, LastName, Email, Mobile,  DoB, Gender, Profile):
 
         if not FirstName :
             raise ValueError('Users must have a first name')
@@ -39,6 +41,7 @@ class UserManager(BaseUserManager):
             LastName = LastName,
             DoB = DoB,
             Email = Email,
+            Mobile = Mobile,
             Gender = Gender,
             Profile = Profile
         )
@@ -99,7 +102,12 @@ class ILPUser(AbstractBaseUser):
         choices=profile_labels,
         verbose_name = "Employee Profile",
     )
-    
+
+    Mobile = models.CharField(
+        max_length=11,
+        null = True,
+        verbose_name = "Employee Mobile No",
+    )
     
     is_active = models.BooleanField(
         default=True,

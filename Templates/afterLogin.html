@@ -13,7 +13,7 @@
     
     <div class="ui fixed menu">
       <div class="ui container">
-	<a class="item" href="./">
+	<a class="item active" href="./">
 	  <div class="header">
 	    <i class="home icon"></i> ILP Online Portal <small>v1.0</small>
 	  </div>
@@ -26,14 +26,13 @@
 	    <a class="item"> <i class="code icon"></i>Leave Tracker </a>
 	  </div>
 	</div>
-	<a class="item"> <i class="mail outline icon"></i> Messages </a> 
+	<a class="item"> <i class="announcement icon"></i> Updates </a> 
 	<div class="ui simple dropdown  right item">
 	  <i class="icon user"></i>
-	  UserName
+	  {{ user.EmpNo }}
 	  <i class="dropdown icon"></i>
 	  <div class="menu">
-	    <a class="item"><i class="edit icon"></i> Edit Profile</a>
-	    <a class="item"><i class="settings icon"></i> Settings</a>
+	    <a class="item"><i class="settings icon"></i> Change Password</a>
 	    <a class="item" href="/auth/logout"><i class="sign out icon"></i> Log out</a>
 	  </div>
 	</div>
@@ -56,13 +55,13 @@
 		<div class="item">
 		  <i class="icon male"></i>
 		  <div class="content">
-		    Aneesh Kumar
+		    {{ user.get_full_name }} 
 		  </div>
 		</div>
 		<div class="item">
 		  <i class="icon calendar"></i>
 		  <div class="content">
-		    Born on Oct 15, 1994
+		    Born on {{ user.DoB }}
 		  </div>
 		</div>
 	      </div>
@@ -72,30 +71,36 @@
 		<div class="item">
 		  <i class="icon user"></i>
 		  <div class="content">
-		    Employee Id : 1007721
+		    Employee Id : {{ user.EmpNo }}
 		  </div>
 		</div>
 		
 		<div class="item">
 		  <i class=" icon eyedropper"></i>
 		  <div class="content">
-		    Profile : Participant
+		    Profile : {{ user.Profile }}
 		  </div>
 		</div>
-		
+		{% ifequal  user.Profile  "Participant" %}
 		<div class="item">
 		  <i class="icon ticket "></i>
 		  <div class="content">
-		    Learing Group : AJA10
+		    Learing Group : {{ participant_profile.lg_id }}
 		  </div>
 		</div>
-		
+		<div class="item">
+		  <i class="icon university "></i>
+		  <div class="content">
+		    Learing Room : {{ participant_profile.lg_id.room_id  }} 
+		  </div>
+		</div>
 		<div class="item">
 		  <i class=" icon student"></i>
 		  <div class="content">
-		    Batch : AHD03
+		    Batch : {{ participant_profile.lg_id.batch_id  }} 
 		  </div>
 		</div>
+		{% endifequal %}
 		
 		
 		
@@ -105,24 +110,24 @@
 		<div class="item">
 		  <i class="mail icon"></i>
 		  <div class="content">
-		    <a href="mailto:#"> aneesh.thangella@tcs.com</a>
+		    <a href="mailto:#"> {{  user.Email}}</a>
 		  </div>
 		</div>
 		
 		<div class="item">
 		  <i class="call icon"></i>
 		  <div class="content">
-		    9160883374
+		    {{ user.Mobile }} &nbsp; <small><a href="#">Edit</a></small>
 		  </div>
 		</div>
 				
 	      </div>
-	      <center><a class="ui mini button icon blue bottom attached" href="edit/contact_info/"><i class="icon edit"></i> Edit Profile</a></center>
+	      
 	    </div>
 	    
 	  </div>
 	  
-	  <div class="twelve wide column">
+	  <div class="ten wide column">
 	    
 	    <div class="ui large header">Welcome to ILP Online Portal <small>v1.0</small> </div>
 	    <p><img src="/static/assets/imgs/para.png" /></p>
@@ -132,15 +137,15 @@
 	    <br>
 	    
 		
-		<div class="nine wide column">
+		<div class="eight wide column">
 		  <h4 class="ui  header">All Apps</h4>
-		  <a class="ui red label">Red</a>
-		  <a class="ui orange label">Orange</a>
-		  <a class="ui yellow label">Yellow</a>
+		  <a class="ui red label"><i class="alarm outline icon"></i> Attendance </a>
+		  <a class="ui orange label"><i class="calendar outline icon"></i> Scheduling Tool </a>
+		  <a class="ui yellow label"> <i class="code icon"></i>Leave Tracker</a>
 		  <a class="ui olive label">Olive</a>
 		  <a class="ui green label">Green</a>
 		  <a class="ui teal label">Teal</a>
-		  <a class="ui blue label">Blue</a> 
+		  <a class="ui blue label">Blue</a><br><br> 
 		  <a class="ui violet label">Violet</a>
 		  <a class="ui purple label">Purple</a>
 		  <a class="ui pink label">Pink</a>
@@ -150,44 +155,7 @@
 		  
 		</div>
 		
-		<div class="ui circular segment">
-  <h2 class="ui header">
-    Buy Now
-    <div class="sub header">$10.99</div>
-  </h2>
-</div>
-<div class="ui inverted circular segment">
-  <h2 class="ui inverted header">
-    Buy Now
-    <div class="sub header">$10.99</div>
-  </h2>
-</div>
-
-<div class="ui circular segment">
-  <h2 class="ui header">
-    Buy Now
-    <div class="sub header">$10.99</div>
-  </h2>
-</div>
-<div class="ui inverted circular segment">
-  <h2 class="ui inverted header">
-    Buy Now
-    <div class="sub header">$10.99</div>
-  </h2>
-</div>
-
-<div class="ui circular segment">
-  <h2 class="ui header">
-    Buy Now
-    <div class="sub header">$10.99</div>
-  </h2>
-</div>
-<div class="ui inverted circular segment">
-  <h2 class="ui inverted header">
-    Buy Now
-    <div class="sub header">$10.99</div>
-  </h2>
-</div>
+	
 	    
 	    
 	    
