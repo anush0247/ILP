@@ -10,7 +10,7 @@ class ParticipantAdmin(admin.ModelAdmin):
 admin.site.register(Participant, ParticipantAdmin)
 
 class StreamAdmin(admin.ModelAdmin):
-	list_display = ('stream_id', 'stream_name')
+	list_display = ('stream_name',)
 
 admin.site.register(Stream, StreamAdmin)
 
@@ -20,7 +20,7 @@ class LeadAdmin(admin.ModelAdmin):
 admin.site.register(Lead, LeadAdmin)
 
 class DepartmentAdmin(admin.ModelAdmin):
-	list_display = ('department_id', 'department_name')
+	list_display = ('department_name',)
 
 admin.site.register(Department, DepartmentAdmin)
 

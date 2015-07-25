@@ -6,11 +6,7 @@ from Auth.models import ILPUser
 
 class TimeSlot(models.Model):
 	
-	slot_id = models.CharField(
-		verbose_name = "Time Slot  Id",
-		unique = True,
-		max_length = 50,
-	)
+	
 
 	slot_name = models.CharField(
 		verbose_name = "Time Slot Name",
@@ -33,16 +29,12 @@ class TimeSlot(models.Model):
 	#campus =  models.ForeignKey('ILP.LearingCampus')
 	
 	def __unicode__(self):
-		return unicode(self.slot_id)
+		return unicode(self.slot_name)
 
 
 class Session(models.Model):
 	
-	session_id =  models.CharField(
-		verbose_name = "Schedule Id",
-		unique = True,
-		max_length = 50,
-	)
+	
 
 	session_name = models.CharField(
 		verbose_name = "Schedule Name",
@@ -60,7 +52,7 @@ class Session(models.Model):
     )	
 
 	def __unicode__(self):
-		return unicode(self.session_id)
+		return unicode(self.session_name)
 
 class ExtraSlot(models.Model):
 	

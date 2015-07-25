@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block main %} 
+<div class="ui breadcrumb">
+  <a class="section">Home</a>
+  <i class="right angle icon divider"></i>
+  <a class="section">Attendace</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section">Today's</div>
+</div>
+<div class="ui  grid " >
+  <div class="row">
+    <div class="sixteen wide column">
+		<div class="ui  pointing top attached menu blue">
+		  <a class="item active">Today's</a>
+		  <a class="item">All Sessions</a>
+		  <a class="item">Missed Sessions</a>
+		</div>
+		<div class="ui attached segment" style="min-height:352px;">
+		  {% if messages %}
+			{% for message in messages %}
+			<div {% if message.tags %} class="ui message {{ message.tags }} "{% endif %}><i class="close icon"></i>{{ message }}</div>
+			{% endfor %}
+			{% endif %}
+		  {% if general_sessions.count or  extra_slots.count %}
+		  <table class="ui five column table very basic ">
+			  <thead>
+				<tr><th>Session Name</th>
+				<th colspan="2">Start</th>
+				<th colspan="2">Stop</th>
+			  </tr></thead>
+			  <tbody>
+			   {% for session in general_sessions %}
+				<tr>
+				  <td>{{ session.session_name }}</td>
+				  <td><a href="/attendance/start/{{session.id}}/" class="ui button green mini">Start</a></td>
+				  <td>--</td>
+				  <td><a href="#" class="ui button red mini">Stop</a></td>
+				  <td>--</td>
+				</tr>
+				{% endfor %}
+				{% for extra in extra_slots %}
+				<tr>
+				  <td> {{ extra.time_slot.slot_name }}</td>
+				  <td><a href="#" class="ui button yellow mini disabled ">Missed</a></td>
+				  <td>9:05 AM</td>
+				  <td><a href="#" class="ui button red mini ">Stop</a></td>
+				  <td>--</td>
+				</tr>
+				{% endfor %}
+			  </tbody>
+			 
+			</table>
+			{% else %}
+			<div class="ui message red">No Sessions Scheduled</div>
+			{% endif %}
+			
+			
+			
+			
+		</div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

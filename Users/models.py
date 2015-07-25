@@ -16,19 +16,14 @@ class Participant(models.Model):
 	
 class Stream(models.Model):
 	
-	stream_id =  models.CharField(
-		verbose_name = "Stream Id",
-		unique = True,
-		max_length = 50,
-	)
-
+	
 	stream_name =  models.CharField(
 		verbose_name = "Stream Name",
 		max_length = 50,
 	)
 	
 	def __unicode__(self):
-		return unicode(self.stream_id)
+		return unicode(self.stream_name)
 
 class Lead(models.Model):
 	
@@ -41,11 +36,7 @@ class Lead(models.Model):
 
 class Department(models.Model):
 	
-	department_id =  models.CharField(
-		verbose_name = "Department Id",
-		unique = True,
-		max_length = 50,
-	)
+	
 
 	department_name =  models.CharField(
 		verbose_name = "Department Name",
@@ -53,7 +44,7 @@ class Department(models.Model):
 	)
 
 	def __unicode__(self):
-		return unicode(self.department_id)
+		return unicode(self.department_name)
 
 class Support(models.Model):
 

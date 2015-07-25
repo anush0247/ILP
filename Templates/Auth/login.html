@@ -22,9 +22,6 @@
 	    <div class="ui small form piled segment left aligned relaxed"
 		 style="background-color: inherint;">
 	      <h3 class="ui icon header">Login</h3>
-	      {% if form.errors %}
-	      <center><span class="ui red fluid message" style="padding-top:10px; padding-bottom:-10px;">Invalid Username / Password </span></center>
-	      {% endif %}
 	      {% csrf_token %}
 	      <div class="field">
 		<label>User Name</label> <input placeholder="User Name"
@@ -38,7 +35,11 @@
 	      <button class="ui submit button small blue" type="submit">Continue</button>
 	      <a href="#" style="float: right; padding-top: 4%;">Forgot
 		Password</a>
+	      
 	    </div>
+	    {% if form.errors %}
+	    <center><span class="ui red fluid message bottom attached" style="padding-top:10px; padding-bottom:-10px;">Invalid Username / Password </span></center>
+	    {% endif %}
 	  </form>
 	</div>
 	<div class="column"></div>

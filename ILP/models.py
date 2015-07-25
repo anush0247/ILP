@@ -2,11 +2,7 @@ from django.db import models
 
 class LearningCenter(models.Model):
 	
-	center_id = models.CharField(
-		verbose_name = "Learing Center Id",
-		unique = True,
-		max_length = 50,
-	)
+	
 
 	center_name = 	models.CharField(
 		verbose_name = "Learing Center Name",
@@ -15,15 +11,11 @@ class LearningCenter(models.Model):
 
 
 	def __unicode__(self):
-		return unicode(self.center_id)
+		return unicode(self.center_name)
 
 class LearningCampus(models.Model) :
 
-	campus_id = models.CharField(
-		verbose_name = "Learing Campus Id",
-		unique = True,
-		max_length = 50,
-	)
+	
 
 	campus_name = models.CharField(
 		verbose_name = "Learing Campus Name",
@@ -33,7 +25,7 @@ class LearningCampus(models.Model) :
 	center = models.ForeignKey('LearningCenter')
 
 	def __unicode__(self):
-		return unicode(self.campus_id)
+		return unicode(self.campus_name)
 	
 
 class LearningRoom(models.Model) :
@@ -52,15 +44,11 @@ class LearningRoom(models.Model) :
 	room_location = models.ForeignKey('LearningCampus')
 
 	def __unicode__(self):
-		return unicode(self.room_id)
+		return unicode(self.room_name)
 
 class Batch(models.Model):
 
-	batch_id = models.CharField(
-		verbose_name = "Batch Id",
-		unique = True,
-		max_length = 50,
-	)
+	
 
 	batch_name = models.CharField(
 		verbose_name = "Batch Name",
@@ -78,15 +66,11 @@ class Batch(models.Model):
 	center = models.ForeignKey('LearningCenter')
 
 	def __unicode__(self):
-		return unicode(self.batch_id)
+		return unicode(self.batch_name)
 
 class LG(models.Model):
 
-	lg_id = models.CharField(
-		verbose_name = "Learing Group Id",
-		unique = True,
-		max_length = 50,
-	)	
+	
 
 	lg_name = models.CharField(
 		verbose_name = "Learing Group Name",
@@ -98,7 +82,7 @@ class LG(models.Model):
 	room_id = models.ForeignKey('LearningRoom')
 
 	def __unicode__(self):
-		return unicode(self.lg_id)
+		return unicode(self.lg_name)
 
 
 class LG_Lead(models.Model):

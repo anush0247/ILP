@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^dj_admin/', include(dj_admin.site.urls)),
 	url(r'^$', HomePageView, name="home"),
 	url(r'^auth/', include('Auth.urls')),
+	url(r'^attendance/', include('Attendance.urls')),	
 ]
 
 if settings.DEBUG:

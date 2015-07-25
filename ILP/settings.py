@@ -149,4 +149,4 @@ LOGOUT_URL=reverse_lazy("logout")
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-
+DUE_MINUTES = 5

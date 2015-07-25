@@ -5,12 +5,12 @@ from django.contrib import admin
 from Schedule.models import TimeSlot, Session, ExtraSlot
 
 class TimeSlotAdmin(admin.ModelAdmin):
-	list_display = ('slot_id','slot_name','start_time','end_time','is_break',)
+	list_display = ('slot_name','start_time','end_time','is_break',)
 
 admin.site.register(TimeSlot, TimeSlotAdmin)
 
 class SessionAdmin(admin.ModelAdmin):
-	list_display = ('session_id','session_name', 'lg_id', 'time_slot', 'date')
+	list_display = ('session_name', 'lg_id', 'time_slot', 'date')
 
 admin.site.register(Session, SessionAdmin)
 

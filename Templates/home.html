@@ -2,8 +2,12 @@
 {% block title %} Home {% endblock %}
 {% block home_active %} active {% endblock %}
 {% block main %} 
-<br>
-<div class="ui  grid " >
+<div class="ui breadcrumb">
+  <a class="section">Home</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section">Welcome</div>
+</div>
+<div class="ui  grid " style="min-height:422px;">
   <div class="row">
     <div class="four wide column">
       <div class="ui afix segment blue">
@@ -46,7 +50,7 @@
 	  <div class="item">
 	    <i class="icon university "></i>
 	    <div class="content">
-	      Learing Room : {{ participant_profile.lg_id.room_id  }} 
+	      Learing Room : {{ participant_profile.lg_id.room_id }} 
 	    </div>
 	  </div>
 	  <div class="item">
