@@ -60,7 +60,7 @@
 				  {% endifequal %}
 				  
 				  {% ifequal one_session.stop_flag "Stop" %}
-				  <td><a href="#" class="ui button red mini">Stop</a></td>
+				  <td><a href="/attendance/stop/{{one_session.session.id}}/" class="ui button red mini">Stop</a></td>
 				  <td>Stop Now</td>
 				  {% endifequal %}
 				  
@@ -106,7 +106,7 @@
 				  {% endifequal %}
 				  
 				  {% ifequal extra.stop_flag "Stop" %}
-				  <td><a href="#" class="ui button red mini">Stop</a></td>
+				  <td><a href="/attendance/stop_extra/{{extra.extra_slot.id}}/" class="ui button red mini">Stop</a></td>
 				  <td>Stop Now</td>
 				  {% endifequal %}
 				  

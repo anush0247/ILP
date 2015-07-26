@@ -39,8 +39,6 @@ def get_all_sessions_info(request, model, prefix ):
 		stop_flag = "You missed"
 		started_log = None
 
-		
-		
 		if(len(_start) == 0) :
 
 			now = datetime.datetime.now().hour*60 + datetime.datetime.now().minute
@@ -95,45 +93,109 @@ def get_attendance_context(request):
 	
 	return context
 
+def start_session(request, model, prefix, pk ):
+	try :
+		model.objects.get(id = pk, date=datetime.date.today())
+	except model.DoesNotExist:
+		raise Http404("Invalid date & Session Combination")
+
+	_name = ""
+	if(prefix == "session"):
+		_name = model.objects.get(id = pk, date=datetime.date.today()).session_name
+	else :
+		_name = model.objects.get(id = pk, date = datetime.date.today()).time_slot.slot_name
+
+	_start = None
+	if(prefix == "session") :
+		_start = AttendanceLog.objects.filter(participant_id = request.user, session_id = model.objects.get(id = pk))
+	else :
+		_start = AttendanceLog.objects.filter(participant_id = request.user, extra_slot_id = model.objects.get(id = pk) )
+	
+	if(len(_start) == 0) :
+
+		now = datetime.datetime.now().hour*60 + datetime.datetime.now().minute
+		orinal_start = model.objects.get(id = pk).time_slot.start_time.hour*60 + model.objects.get(id = pk).time_slot.start_time.minute
+		diff = now - orinal_start
+
+		if diff <= settings.DUE_MINUTES and  diff >= 0  :
+			started_at = datetime.time(datetime.datetime.now().hour, datetime.datetime.now().minute)
+			if(prefix == "session") :
+				entry = AttendanceLog(participant_id = request.user, session_id = model.objects.get(id = pk), started_at = started_at )
+				entry.save()
+				messages.success(request,'Session \'#%s\' started at #%s' %(_name, entry.id) )
+			else :
+				entry = AttendanceLog(participant_id = request.user, extra_slot_id = model.objects.get(id = pk), started_at = started_at )
+				entry.save()
+				messages.success(request,'Extra Slot \'#%s\' started at #%s' %(_name, entry.id) )
+				
+		elif ( diff < 0 ) :
+			messages.error(request,'Not allowed to Start this Session / Extra Slot \'#%s\'' %(_name))
+		else :
+			messages.error(request,'Sorry.! You just missed to Start this Session / Extra Slot \'#%s\'' %(_name))
+	else :
+		messages.error(request,'Session / Extra Slot \'#%s\' already started at #%s' %(_name, _start[0].id))
+	
+	return render(request, "Attendance/home.html", get_attendance_context(request))	
+
+def stop_session(request, model, prefix, pk ):
+	try :
+		model.objects.get(id = pk, date=datetime.date.today())
+	except model.DoesNotExist:
+		raise Http404("Invalid date & Session Combination")
+
+	_name = ""
+	if(prefix == "session"):
+		_name = model.objects.get(id = pk, date=datetime.date.today()).session_name
+	else :
+		_name = model.objects.get(id = pk, date = datetime.date.today()).time_slot.slot_name
+
+	_start = None
+	if(prefix == "session") :
+		_start = AttendanceLog.objects.filter(participant_id = request.user, session_id = model.objects.get(id = pk))
+	else :
+		_start = AttendanceLog.objects.filter(participant_id = request.user, extra_slot_id = model.objects.get(id = pk) )
+	
+	if(len(_start) != 0) :
+		if(_start[0].ended_at == None) :
+			now = datetime.datetime.now().hour*60 + datetime.datetime.now().minute
+			orinal_start = model.objects.get(id = pk).time_slot.end_time.hour*60 + model.objects.get(id = pk).time_slot.end_time.minute
+			diff = now - orinal_start
+
+			if diff <= settings.DUE_MINUTES and  diff >= 0  :
+				stopped_at = datetime.time(datetime.datetime.now().hour, datetime.datetime.now().minute)
+				_start[0].ended_at = stopped_at
+				_start[0].save()
+				messages.success(request,'Session / Extra Slot \'#%s\' Stopped at #%s' %(_name, _start[0].ended_at) )	
+			elif ( diff < 0 ) :
+					messages.error(request,'Not allowed to Start this Session / Extra Slot \'#%s\'' %(_name))
+			else :
+					messages.error(request,'Sorry.! You just missed to Start this Session / Extra Slot \'#%s\'' %(_name))
+		else :
+			messages.error(request,'Session / Extra Slot \'#%s\' already started at #%s' %(_name, _start[0].id))
+	else :
+		messages.error(request,'Session / Extra Slot \'#%s\' Not yet Started. Please Start it first' %(_name))
+	
+	return render(request, "Attendance/home.html", get_attendance_context(request))	
+
 @auth
 def AttendaceView(request):
 	return render(request, "Attendance/home.html", get_attendance_context(request))
 
-
 @auth
 def StartSession(request, session):
-
-	try :
-		Session.objects.get(id = session, date=datetime.date.today())
-	except Session.DoesNotExist:
-		raise Http404("Invalid date & Session Combination")
-
-	session_name = Session.objects.get(id = session, date=datetime.date.today()).session_name
-	attendance_log = AttendanceLog.objects.filter(participant_id = request.user, session_id = Session.objects.get(id = session) )	
-	if(len(attendance_log) == 0 ):
-		orinal = Session.objects.get(id = session).time_slot.start_time.hour*60 + Session.objects.get(id = session).time_slot.start_time.minute
-		now = datetime.datetime.now().hour*60 + datetime.datetime.now().minute
-		if( ( (now - orinal) <= settings.DUE_MINUTES )) :
-			started_at = datetime.time(datetime.datetime.now().hour, datetime.datetime.now().minute)
-			entry = AttendanceLog(participant_id = request.user,session_id = Session.objects.get(id = session), started_at = started_at )
-			entry.save()
-			messages.success(request,'Session \'#%s\' started at #%s' %(session_name, entry.id) )
-		else :
-			messages.error(request,'Not allowed to Start this Session \'#%s\'' %(session_name))
-	else :
-		messages.error(request,'Session \'#%s\' already started at #%s' %(session_name, attendance_log[0].id))
-		
-	return render(request, "Attendance/home.html", get_attendance_context(request))	
-	
-		
+	return start_session(request, Session, "session", session )	
 
 @auth
 def StartExtraSlot(request, extra_slot_id ):
-	pass
+	return start_session(request, ExtraSlot, "extra_slot", extra_slot_id )
 
 @auth
-def StopSession(request, log_id ):
-	pass
+def StopSession(request, session ):
+	return stop_session(request, Session, "session", session )	
+
+@auth
+def StopExtraSlot(request, extra_slot_id ):
+	return stop_session(request, ExtraSlot, "extra_slot", extra_slot_id )
 
 
 	
