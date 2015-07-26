@@ -49,7 +49,7 @@ def get_all_sessions_info(request, model, prefix ):
 
 			if diff <= settings.DUE_MINUTES and  diff >= 0  :
 				started_flag = "Start"
-				stop_flag = "Yet to Start"
+				stop_flag = "Yet to Stop"
 			elif ( diff < 0 ) :
 				started_flag = "Yet to Start"
 			else :

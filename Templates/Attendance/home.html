@@ -41,7 +41,7 @@
 				  
 				  {% ifequal one_session.started_flag "Yet to Start" %}
 				  <td><a href="#" class="ui button yellow mini disabled">Start</a></td>
-				  <td>Start Now</td>
+				  <td>Yet to Start</td>
 				  {% endifequal %}
 				  
 				  {% ifequal one_session.started_flag "Start" %}
@@ -87,11 +87,11 @@
 				  
 				  {% ifequal extra.started_flag "Yet to Start" %}
 				  <td><a href="#" class="ui button yellow mini disabled">Start</a></td>
-				  <td>Start Now</td>
+				  <td>Yet to Start</td>
 				  {% endifequal %}
 				  
 				  {% ifequal extra.started_flag "Start" %}
-				  <td><a href="/attendance/start/{{extra.session.id}}/" class="ui button green mini">Start Now</a></td>
+				  <td><a href="/attendance/start_extra/{{extra.extra_slot.id}}/" class="ui button green mini">Start Now</a></td>
 				  <td>--</td>
 				  {% endifequal %}
 				  
