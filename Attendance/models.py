@@ -19,5 +19,6 @@ class AttendanceLog(models.Model):
 	ended_at = models.TimeField(
 		verbose_name = "Time Slot End Time",
 		null = True,
+		blank = True,
 	)
 

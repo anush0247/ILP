@@ -22,7 +22,7 @@
 			<div {% if message.tags %} class="ui message {{ message.tags }} "{% endif %}><i class="close icon"></i>{{ message }}</div>
 			{% endfor %}
 			{% endif %}
-		  {% if general_sessions.count or  extra_slots.count %}
+		  {% if general_sessions  or  extra_slots %}
 		  <table class="ui five column table very basic ">
 			  <thead>
 				<tr><th>Session Name</th>
@@ -30,22 +30,95 @@
 				<th colspan="2">Stop</th>
 			  </tr></thead>
 			  <tbody>
-			   {% for session in general_sessions %}
+			   {% for one_session in general_sessions %}
 				<tr>
-				  <td>{{ session.session_name }}</td>
-				  <td><a href="/attendance/start/{{session.id}}/" class="ui button green mini">Start</a></td>
+				  <td>{{ one_session.session.session_name }}</td>
+				  
+				  {% ifequal one_session.started_flag "Already Started" %}
+				  <td><a href="#" class="ui button green mini ">Started</a></td>
+				  <td>{{one_session.started_log.started_at}}</td>
+				  {% endifequal %}
+				  
+				  {% ifequal one_session.started_flag "Yet to Start" %}
+				  <td><a href="#" class="ui button yellow mini disabled">Start</a></td>
+				  <td>Start Now</td>
+				  {% endifequal %}
+				  
+				  {% ifequal one_session.started_flag "Start" %}
+				  <td><a href="/attendance/start/{{one_session.session.id}}/" class="ui button green mini">Start Now</a></td>
 				  <td>--</td>
+				  {% endifequal %}
+				  
+				  {% ifequal one_session.started_flag "You missed" %}
+				  <td><a href="#" class="ui button teal mini disabled">Start </a></td>
+				  <td>You Missed</td>
+				  {% endifequal %}
+				  
+				  {% ifequal one_session.stop_flag "Yet to Stop" %}
+				  <td><a href="#" class="ui button yellow mini disabled">Stop</a></td>
+				  <td>Yet to Stop</td>
+				  {% endifequal %}
+				  
+				  {% ifequal one_session.stop_flag "Stop" %}
 				  <td><a href="#" class="ui button red mini">Stop</a></td>
-				  <td>--</td>
+				  <td>Stop Now</td>
+				  {% endifequal %}
+				  
+				  {% ifequal one_session.stop_flag "You missed" %}
+				  <td><a href="#" class="ui button teal mini disabled">Stop</a></td>
+				  <td>You Missed</td>
+				  {% endifequal %}
+				  
+				  {% ifequal one_session.stop_flag "Stopped" %}
+				  <td><a href="#" class="ui button red mini">Stopped</a></td>
+				  <td>{{one_session.started_log.ended_at}}</td>
+				  {% endifequal %}
+				  
 				</tr>
 				{% endfor %}
 				{% for extra in extra_slots %}
 				<tr>
-				  <td> {{ extra.time_slot.slot_name }}</td>
-				  <td><a href="#" class="ui button yellow mini disabled ">Missed</a></td>
-				  <td>9:05 AM</td>
-				  <td><a href="#" class="ui button red mini ">Stop</a></td>
+				  <td> {{ extra.extra_slot.time_slot.slot_name }}</td>
+				  
+				  {% ifequal extra.started_flag "Already Started" %}
+				  <td><a href="#" class="ui button green mini ">Started</a></td>
+				  <td>{{extra.started_log.started_at}}</td>
+				  {% endifequal %}
+				  
+				  {% ifequal extra.started_flag "Yet to Start" %}
+				  <td><a href="#" class="ui button yellow mini disabled">Start</a></td>
+				  <td>Start Now</td>
+				  {% endifequal %}
+				  
+				  {% ifequal extra.started_flag "Start" %}
+				  <td><a href="/attendance/start/{{extra.session.id}}/" class="ui button green mini">Start Now</a></td>
 				  <td>--</td>
+				  {% endifequal %}
+				  
+				  {% ifequal extra.started_flag "You missed" %}
+				  <td><a href="#" class="ui button teal mini disabled">Start </a></td>
+				  <td>You Missed</td>
+				  {% endifequal %}
+				  
+				  {% ifequal extra.stop_flag "Yet to Stop" %}
+				  <td><a href="#" class="ui button yellow mini disabled">Stop</a></td>
+				  <td>Yet to Stop</td>
+				  {% endifequal %}
+				  
+				  {% ifequal extra.stop_flag "Stop" %}
+				  <td><a href="#" class="ui button red mini">Stop</a></td>
+				  <td>Stop Now</td>
+				  {% endifequal %}
+				  
+				  {% ifequal extra.stop_flag "You missed" %}
+				  <td><a href="#" class="ui button teal mini disabled">Stop</a></td>
+				  <td>You Missed</td>
+				  {% endifequal %}
+				  
+				  {% ifequal extra.stop_flag "Stopped" %}
+				  <td><a href="#" class="ui button red mini">Stopped</a></td>
+				  <td>{{extra.started_log.ended_at}}</td>
+				  {% endifequal %}
 				</tr>
 				{% endfor %}
 			  </tbody>
