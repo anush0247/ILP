@@ -3,10 +3,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>ILP Online Portal v1.0 - {% block title %} {% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="/static/assets/font_style.css">
-    <link rel="stylesheet" type="text/css" href="/static/assets/semantic.min.css">
-    <script src="/static/assets/jquery.min.js"></script>
-    <script src="/static/assets/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}assets/font_style.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}assets/semantic.min.css">
+    <script src="{{ STATIC_URL }}assets/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}assets/semantic.min.js"></script>
     <script>
       $(document).ready(function(){
 		$('.message .close').on('click', function() {
