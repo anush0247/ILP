@@ -4,3 +4,4 @@ Media/
 .gitignore
 db.sqlite3
 *.pyc
+.idea/
