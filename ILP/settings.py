@@ -151,6 +151,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 DUE_MINUTES = 5
 
+import email
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
