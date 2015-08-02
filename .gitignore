@@ -5,3 +5,4 @@ Media/
 db.sqlite3
 *.pyc
 .idea/
+ILP/email.py

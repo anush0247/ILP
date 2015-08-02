@@ -150,3 +150,12 @@ LOGOUT_URL=reverse_lazy("logout")
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 DUE_MINUTES = 5
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = email.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = email.EMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = email.DEFAULT_FROM_EMAIL
+DEFAULT_TO_EMAIL = email.DEFAULT_TO_EMAIL
