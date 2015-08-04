@@ -36,7 +36,7 @@ def get_all_sessions_info(request, model, prefix ):
 			_start = AttendanceLog.objects.filter(participant_id = request.user, extra_slot_id = model.objects.get(id = _slot.id) )
 
 		started_flag = "Yet to Start"
-		stop_flag = "You missed"
+		stop_flag = "Not Startd Yet"
 		started_log = None
 
 		if(len(_start) == 0) :

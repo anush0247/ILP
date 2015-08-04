@@ -74,6 +74,10 @@
 				  <td>{{one_session.started_log.ended_at}}</td>
 				  {% endifequal %}
 				  
+                  {% ifequal one_session.stop_flag "Not Startd Yet" %}
+				  <td><a href="#" class="ui button teal mini disabled">Stop</a></td>
+				  <td>Not Startd Yet</td>
+				  {% endifequal %}
 				</tr>
 				{% endfor %}
 				{% for extra in extra_slots %}
@@ -118,6 +122,11 @@
 				  {% ifequal extra.stop_flag "Stopped" %}
 				  <td><a href="#" class="ui button red mini">Stopped</a></td>
 				  <td>{{extra.started_log.ended_at}}</td>
+				  {% endifequal %}
+                    
+                  {% ifequal extra.stop_flag "Not Startd Yet" %}
+				  <td><a href="#" class="ui button teal mini disabled">Stop</a></td>
+				  <td>Not Startd Yet</td>
 				  {% endifequal %}
 				</tr>
 				{% endfor %}
